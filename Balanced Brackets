@@ -1,0 +1,50 @@
+//The first line contains a single integer , the number of strings.
+//Each of the next lines contains a single string "s", a sequence of brackets.
+//You have to determine is the sequence balanced or not.
+
+Stack<char> openingBrackets = new Stack<char>();
+                
+        for(int i=0;i<s.Length;i++)
+        {   
+            if(s[i] == '(' || s[i] == '[' || s[i] == '{')
+            {                
+                openingBrackets.Push(s[i]);
+            }
+            else
+            {
+                // Check if stack is empty before accessing
+                if(openingBrackets.Count > 0)
+                {
+                    if(openingBrackets.Peek() == '(' && s[i] == ')')
+                    {
+                        openingBrackets.Pop();
+                    }
+                    else if(openingBrackets.Peek() == '[' && s[i] == ']')
+                    {
+                        openingBrackets.Pop();
+                    }
+                    else if(openingBrackets.Peek() == '{' && s[i] == '}')
+                    {
+                        openingBrackets.Pop();
+                    }
+                    else
+                    {
+                        return "NO";  
+                    } 
+                }
+                else
+                {
+                    return "NO"; 
+                }
+            }
+        }
+        
+        if(openingBrackets.Count > 0)
+        {
+            return "NO";
+        }
+        else 
+        {
+            return "YES";
+        }
+    }
