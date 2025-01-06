@@ -1,0 +1,9 @@
+using System.Linq;
+using System;
+
+//Reverse a list of integers.
+public static List<int> reverseArray(List<int> a)
+{
+    a.Reverse();
+    return a;
+}
