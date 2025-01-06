@@ -1,0 +1,38 @@
+using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
+using System;
+
+// Given a 6x6 2D List "arr", calculate the hourglass sum for every hourglass in "arr" (16 of them):
+// a b c
+//   d
+// e f g
+// Then return the maximum hourglass sum. 
+
+
+
+// The function is expected to return an integer.
+// The function accepts 2D integer list arr as a parameter.
+
+public static int hourglassSum(List<List<int>> arr)
+{
+    int maxSum = int.MinValue;
+    int sum = 0; 
+        
+    for(int i=0;i<4;i++)
+    {
+        for(int y=1;y<5;y++)
+        {
+            sum = arr[i][y - 1] + arr[i][y] + arr[i][y + 1]
+                  + arr[i + 1][y] 
+                  + arr[i + 2][y - 1] + arr[i + 2][y] + arr[i + 2][y + 1];
+                
+            if(maxSum < sum)
+            {
+                maxSum = sum;
+            }
+        }
+    }
+        
+    return maxSum;
+}
