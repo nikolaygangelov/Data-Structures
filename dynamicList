@@ -1,0 +1,52 @@
+using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
+using System;
+
+// Declare a 2-dimensional list, arr, of  empty lists. All lists are zero indexed.
+// Declare an integer, lastAnswer, and initialize it to 0.
+
+// There are 2 types of queries, given as an array of strings for you to parse:
+
+// Query: 1 x y
+  // 1. Let idx = ((x^lastAnswer)%n).
+  // 2. Append the integer y to arr[idx].
+// Query: 2 x y
+  // 1. Let idx = ((x^lastAnswer)%n).
+  // 2. Assign the value  to arr[idx][y%length(arr[idx])] to lastAnswer.
+// Store the new value of lastAnswer to an answers array.
+
+// Note: ^ is the bitwise XOR operation.
+
+// The function accepts following parameters:
+  // 1. integer n
+  // 2. 2D integer list queries
+public static List<int> dynamicArray(int n, List<List<int>> queries)
+{
+    List<int> dynamicList = new List<int>();
+    List<List<int>> arr = new List<List<int>>();
+        
+    for (int i = 0; i < n; i++) 
+    {
+        List<int> a = new List<int>();
+        arr.Add(a);
+    } 
+            
+    int lastAnswer = 0;
+        
+    for (int i = 0; i < queries.Count; i++) 
+    {  
+            if(queries[i][0] == 1)
+            {
+                arr[((queries[i][1]^lastAnswer) % n)].Add(queries[i][2]);
+            }
+            else if(queries[i][0] == 2)
+            {
+                int length = arr[((queries[i][1]^lastAnswer)%n)].Count;
+                lastAnswer = arr[((queries[i][1]^lastAnswer)%n)][queries[i][2] % length];
+                dynamicList.Add(lastAnswer);
+            } 
+    }
+        
+    return dynamicList;
+}
